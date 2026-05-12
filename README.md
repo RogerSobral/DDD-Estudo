@@ -76,6 +76,64 @@ src/
 
 ---
 
+# Diagrama Banco de Dados
+
+# Diagrama Banco de Dados — Sistema de Controle de Estoque
+
+```mermaid
+erDiagram
+
+    PRODUTO {
+        int id_produto PK
+        varchar nome
+        varchar marca
+        varchar unidade
+        int id_categoria FK
+    }
+
+    CATEGORIA {
+        int id_categoria PK
+        varchar tipo
+    }
+
+    ESTOQUE {
+        int id_estoque PK
+        int id_produto FK
+        decimal quantidade
+    }
+
+    MOVIMENTO {
+        int id_movimento PK
+        int id_produto FK
+        int id_funcionario FK
+        int id_sala FK
+        varchar tipo_movimento
+        decimal quantidade
+        datetime data_movimento
+    }
+
+    FUNCIONARIO {
+        int id_funcionario PK
+        varchar nome
+        varchar email
+    }
+
+    SALA {
+        int id_sala PK
+        varchar numero_sala
+        varchar andar
+    }
+
+    CATEGORIA ||--o{ PRODUTO : possui
+
+    PRODUTO ||--|| ESTOQUE : controla
+
+    PRODUTO ||--o{ MOVIMENTO : movimenta
+
+    FUNCIONARIO ||--o{ MOVIMENTO : realiza
+
+    SALA ||--o{ MOVIMENTO : destino
+
 # Explicação das camadas
 
 # DOMAIN
