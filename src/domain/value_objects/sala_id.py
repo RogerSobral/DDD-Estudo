@@ -1,10 +1,10 @@
-class ProdutoId:
+class SalaId:
 
     def __init__(self, valor: int):
 
         if valor <= 0:
             raise ValueError(
-                "ID do produto inválido"
+                "Sala inválida"
             )
 
         self.__valor = valor
@@ -13,16 +13,9 @@ class ProdutoId:
     def valor(self):
         return self.__valor
 
-    @staticmethod
-    def criar(gerador_id):
-
-        novo_id = gerador_id.gerar()
-
-        return ProdutoId(novo_id)
-
     def __eq__(self, other):
 
-        if not isinstance(other, ProdutoId):
+        if not isinstance(other, SalaId):
             return False
 
         return self.__valor == other.valor

@@ -1,6 +1,8 @@
 from src.domain.value_objects.produto_id import ProdutoId
-from src.domain.value_objects.dinheiro import Dinheiro
-from src.domain.exceptions.produto_exception import ProdutoInvalidoException
+from src.domain.value_objects.nome_produto import NomeProduto
+from src.domain.value_objects.marca import Marca
+from src.domain.value_objects.unidade import Unidade
+from src.domain.value_objects.categoria_id import CategoriaId
 
 
 class Produto:
@@ -8,63 +10,96 @@ class Produto:
     def __init__(
         self,
         produto_id: ProdutoId,
-        nome: str,
-        marca: str,
-        valor: Dinheiro
+        nome: NomeProduto,
+        marca: Marca,
+        unidade: Unidade,
+        categoria_id: CategoriaId
     ):
 
-        self._id = produto_id
-        self._nome = nome
-        self._marca = marca
-        self._valor = valor
-
-        self.validar()
+        self.__produto_id = produto_id
+        self.__nome = nome
+        self.__marca = marca
+        self.__unidade = unidade
+        self.__categoria_id = categoria_id
 
     @property
-    def id(self):
-        return self._id
+    def produto_id(self):
+        return self.__produto_id
 
     @property
     def nome(self):
-        return self._nome
+        return self.__nome
 
     @property
     def marca(self):
-        return self._marca
+        return self.__marca
 
     @property
-    def valor(self):
-        return self._valor
+    def unidade(self):
+        return self.__unidade
 
-    def alterar_nome(self, novo_nome):
+    @property
+    def categoria_id(self):
+        return self.__categoria_id
 
-        if not novo_nome:
-            raise ProdutoInvalidoException("Nome inválido")
+    def alterar_nome(
+        self,
+        novo_nome: NomeProduto
+    ):
 
-        self._nome = novo_nome
+        self.__nome = novo_nome
 
-    def alterar_valor(self, novo_valor):
+    def alterar_marca(
+        self,
+        nova_marca: Marca
+    ):
 
-        self._valor = Dinheiro(novo_valor)
+        self.__marca = nova_marca
 
-    def validar(self):
+    def alterar_unidade(
+        self,
+        nova_unidade: Unidade
+    ):
 
-        if not self._nome:
-            raise ProdutoInvalidoException("Nome obrigatório")
+        self.__unidade = nova_unidade
 
-        if len(self._nome) < 2:
-            raise ProdutoInvalidoException(
-                "Nome deve possuir ao menos 2 caracteres"
-            )
+    def alterar_categoria(
+        self,
+        nova_categoria: CategoriaId
+    ):
 
-        if not self._marca:
-            raise ProdutoInvalidoException("Marca obrigatória")
+        self.__categoria_id = nova_categoria
 
     def to_dict(self):
 
         return {
-            "id": self._id.valor,
-            "nome": self._nome,
-            "marca": self._marca,
-            "valor": self._valor.valor
+            "id_produto": self.__produto_id.valor,
+            "nome": self.__nome.valor,
+            "marca": self.__marca.valor,
+            "unidade": self.__unidade.valor,
+            "categoria_id": self.__categoria_id.valor
         }
+
+    @staticmethod
+    def from_dict(data: dict):
+
+        return Produto(
+            produto_id=ProdutoId(data["id_produto"]),
+            nome=NomeProduto(data["nome"]),
+            marca=Marca(data["marca"]),
+            unidade=Unidade(data["unidade"]),
+            categoria_id=CategoriaId(
+                data["categoria_id"]
+            )
+        )
+
+    def __repr__(self):
+
+        return (
+            f"Produto("
+            f"id={self.__produto_id.valor}, "
+            f"nome='{self.__nome.valor}', "
+            f"marca='{self.__marca.valor}', "
+            f"unidade='{self.__unidade.valor}'"
+            f")"
+        )
