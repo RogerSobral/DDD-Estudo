@@ -80,8 +80,6 @@ src/
 
 # Diagrama Banco de Dados — Sistema de Controle de Estoque
 
-```mermaid
-erDiagram
 
     PRODUTO {
         int id_produto PK
