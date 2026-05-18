@@ -116,11 +116,6 @@ src/
         varchar email
     }
 
-    SALA {
-        int id_sala PK
-        varchar numero_sala
-        varchar andar
-    }
 
     CATEGORIA ||--o{ PRODUTO : possui
 
@@ -130,7 +125,6 @@ src/
 
     FUNCIONARIO ||--o{ MOVIMENTO : realiza
 
-    SALA ||--o{ MOVIMENTO : destino
 
 # Explicação das camadas
 
