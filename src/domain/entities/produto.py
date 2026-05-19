@@ -1,3 +1,4 @@
+from src.domain.value_objects.dinheiro import Dinheiro
 from src.domain.value_objects.produto_id import ProdutoId
 from src.domain.value_objects.nome_produto import NomeProduto
 from src.domain.value_objects.marca import Marca
@@ -69,6 +70,10 @@ class Produto:
     ):
 
         self.__categoria_id = nova_categoria
+
+    def alterar_valor(self, novo_valor: Dinheiro):
+
+        self.__valor = novo_valor
 
     def to_dict(self):
 

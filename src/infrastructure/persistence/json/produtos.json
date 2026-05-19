@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "nome": "Camiseta Básica",
+        "marca": "Marca A",
+        "valor": 29.99,
+        "categoria_id": "1"
+    },
+    {
+        "id": "2",
+        "nome": "Calça Jeans",
+        "marca": "Marca B",
+        "valor": 79.99,
+        "categoria_id": "2"
+    },
+    {
+        "id": "3",
+        "nome": "Tênis Esportivo",
+        "marca": "Marca C",
+        "valor": 149.99,
+        "categoria_id": "3"
+    }
+]

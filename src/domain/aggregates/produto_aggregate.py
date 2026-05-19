@@ -1,4 +1,5 @@
 from src.domain.entities.produto import Produto
+from src.domain.value_objects.dinheiro import Dinheiro
 
 
 class ProdutoAggregate:
@@ -11,9 +12,10 @@ class ProdutoAggregate:
     def produto(self):
         return self._produto
 
-    def alterar_preco(self, novo_valor):
+    def alterar_preco(self, novo_valor: Dinheiro):
+        self._produto.alterar_valor(novo_valor=novo_valor)
 
-        self._produto.alterar_valor(novo_valor)
+        
 
     def alterar_nome(self, novo_nome):
 
